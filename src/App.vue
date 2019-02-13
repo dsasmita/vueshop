@@ -1,25 +1,34 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+    <v-app>
+        <!-- component header -->
+        <c-header>
+        </c-header>
+        <!-- component sidebar -->
+        <c-side-bar>
+        </c-side-bar>
+        <!-- konten utama -->
+        <v-content>
+            <v-slide-y-transition mode="out-in">
+                <router-view>
+                </router-view>
+            </v-slide-y-transition>
+        </v-content>
+        <!-- component footer -->
+        <c-footer>
+        </c-footer>
+    </v-app>
 </template>
-<style lang="stylus">
-#app
-  font-family 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
+<script>
+import CHeader from '@/components/CHeader.vue'
+import CFooter from '@/components/CFooter.vue'
+import CSideBar from '@/components/CSideBar.vue'
 
-#nav
-  padding 30px
-  a
-    font-weight bold
-    color #2c3e50
-    &.router-link-exact-active
-      color #42b983
-</style>
+export default {
+  name: 'App',
+  components: {
+    CHeader,
+    CFooter,
+    CSideBar
+  }
+}
+</script>
