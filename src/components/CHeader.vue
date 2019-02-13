@@ -2,12 +2,12 @@
     <!-- toolbar vuetify dengan warna primary -->
     <v-toolbar color="primary" dark="">
         <!-- header bagian kiri -->
-        <v-toolbar-side-icon @click="setSideBar(!sideBar)">
-        </v-toolbar-side-icon>
+        <v-toolbar-side-icon v-if="isHome" @click="setSideBar(!sideBar)"></v-toolbar-side-icon>
+        <v-btn v-if="!isHome" icon @click="$router.go(-1)">
+            <v-icon>arrow_back</v-icon>
+        </v-btn>
         <!-- header bagian tengah -->
-        <v-toolbar-title class="white--text">
-            Vueshop
-        </v-toolbar-title>
+        <v-toolbar-title class="white--text">{{ appName }}</v-toolbar-title>
         <!-- separator supaya header bagaian kanan posisinya rata kanan -->
         <v-spacer>
         </v-spacer>
@@ -23,7 +23,7 @@
             </v-badge>
         </v-btn>
         <!-- kolom pencarian di bawah header -->
-        <v-text-field append-icon="mic" flat="" hide-details="" label="Search" prepend-inner-icon="search" slot="extension" solo-inverted="">
+        <v-text-field v-if="isHome" append-icon="mic" flat="" hide-details="" label="Search" prepend-inner-icon="search" slot="extension" solo-inverted="">
         </v-text-field>
     </v-toolbar>
 </template>
@@ -39,9 +39,14 @@ export default {
             setSideBar: 'setSideBar',
         }),
     },
-    computed: { ...mapGetters({
+    computed: 
+    { 
+        ...mapGetters({
             sideBar: 'sideBar',
         }),
+        isHome () {
+            return (this.$route.path==='/')
+        },
     }
 }
 </script>

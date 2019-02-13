@@ -14,7 +14,7 @@
                 <v-card-text class="white--text pt-0" v-if="isHome">
                     Lorem ipsum sit dolor amet ...
                 </v-card-text>
-                <v-layout justify-center="" row="" wrap="">
+                <v-layout justify-center="" row="" wrap="" v-if="isHome">
                     <!-- link menu halaman aplikasi -->
                     <v-btn :key="link" color="white" flat="" round="" v-for="link in links">
                         {{ link }}
@@ -52,5 +52,11 @@ data: () => ({
 			'Contact Us'
 		]
 	}),
+    computed: 
+    { 
+        isHome () {
+            return (this.$route.path==='/')
+        },
+    }
 }
 </script>
