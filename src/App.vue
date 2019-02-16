@@ -16,6 +16,11 @@
         <!-- component footer -->
         <c-footer>
         </c-footer>
+        <c-alert></c-alert>
+        <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-
+        bottom-transition">
+            <search></search>
+        </v-dialog>
     </v-app>
 </template>
 <script>
@@ -23,12 +28,34 @@ import CHeader from '@/components/CHeader.vue'
 import CFooter from '@/components/CFooter.vue'
 import CSideBar from '@/components/CSideBar.vue'
 
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
-  name: 'App',
-  components: {
-    CHeader,
-    CFooter,
-    CSideBar
-  }
+    name: 'App',
+    components: {
+        CHeader,
+        CFooter,
+        CSideBar,
+        CAlert: () => import(/* webpackChunkName: "c-alert" */ '@/components/CAlert.vue'),
+        Search: () => import(/* webpackChunkName: "search" */ '@/views/Search.vue')
+    },
+    methods: {
+        ...mapActions({
+            setStatusDialog: 'dialog/setStatus',
+        }),
+    },
+    computed: { 
+        ...mapGetters({
+            statusDialog: 'dialog/status',
+        }),
+        dialog: {
+            get() {
+                return this.statusDialog
+            },
+            set(value) {
+                this.setStatusDialog(value)
+            }
+        },
+    },
 }
 </script>

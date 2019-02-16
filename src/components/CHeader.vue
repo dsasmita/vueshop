@@ -14,16 +14,23 @@
         <!-- header bagian kanan -->
         <v-btn icon="">
             <v-badge color="orange" left="" overlap="">
-                <span slot="badge">
-                    1
-                </span>
+                <span slot="badge" v-if="countCart>0"> {{ countCart }} </span>
                 <v-icon>
                     shopping_cart
                 </v-icon>
             </v-badge>
         </v-btn>
         <!-- kolom pencarian di bawah header -->
-        <v-text-field v-if="isHome" append-icon="mic" flat="" hide-details="" label="Search" prepend-inner-icon="search" slot="extension" solo-inverted="">
+        <v-text-field 
+            v-if="isHome" 
+            @click="setStatusDialog(true)"
+            append-icon="mic" 
+            flat="" 
+            hide-details="" 
+            label="Search" 
+            prepend-inner-icon="search" 
+            slot="extension" 
+            solo-inverted="">
         </v-text-field>
     </v-toolbar>
 </template>
@@ -35,14 +42,17 @@
     } from 'vuex'
 export default {
     name: 'c-header',
-    methods: { ...mapActions({
+    methods: { 
+        ...mapActions({
             setSideBar: 'setSideBar',
+            setStatusDialog: 'dialog/setStatus'
         }),
     },
     computed: 
     { 
         ...mapGetters({
             sideBar: 'sideBar',
+            countCart : 'cart/count'
         }),
         isHome () {
             return (this.$route.path==='/')

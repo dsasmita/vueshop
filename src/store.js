@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import cart from './stores/cart'
+import alert from './stores/alert'
+import dialog from './stores/dialog'
+
 Vue.use(Vuex)
+
 export default new Vuex.Store({
     state: {
         sideBar: false,
@@ -20,4 +25,9 @@ export default new Vuex.Store({
     getters: {
         sideBar: state => state.sideBar,
     },
+    modules: {
+        cart,
+        alert,
+        dialog
+    }
 })

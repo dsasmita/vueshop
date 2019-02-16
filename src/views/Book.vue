@@ -82,6 +82,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 export default {
     data() {
         return {
@@ -89,8 +90,17 @@ export default {
         }
     },
     methods: {
-        buy() {
-            alert('Buy')
+        ...mapActions({
+            addCart : 'cart/add',
+            setAlert : 'alert/set',
+        }),
+        buy(){
+            this.addCart(this.book)
+            this.setAlert({
+                status : true,
+                text : 'Added to cart',
+                type : 'success',
+            })
         }
     },
     created() {
