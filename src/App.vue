@@ -17,10 +17,11 @@
         <c-footer>
         </c-footer>
         <c-alert></c-alert>
-        <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-
-        bottom-transition">
-            <search></search>
-        </v-dialog>
+        <keep-alive>
+            <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+                <component :is="currentComponent"></component>
+            </v-dialog>
+        </keep-alive>
     </v-app>
 </template>
 <script>
@@ -37,7 +38,9 @@ export default {
         CFooter,
         CSideBar,
         CAlert: () => import(/* webpackChunkName: "c-alert" */ '@/components/CAlert.vue'),
-        Search: () => import(/* webpackChunkName: "search" */ '@/views/Search.vue')
+        Search: () => import(/* webpackChunkName: "search" */ '@/views/Search.vue'),
+        Login: () => import(/* webpackChunkName: "login" */ '@/views/Login.vue'),
+        Register: () => import(/* webpackChunkName: "register" */ '@/views/Register.vue'),
     },
     methods: {
         ...mapActions({
@@ -47,6 +50,7 @@ export default {
     computed: { 
         ...mapGetters({
             statusDialog: 'dialog/status',
+            currentComponent: 'dialog/component'
         }),
         dialog: {
             get() {

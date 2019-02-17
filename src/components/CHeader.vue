@@ -23,7 +23,7 @@
         <!-- kolom pencarian di bawah header -->
         <v-text-field 
             v-if="isHome" 
-            @click="setStatusDialog(true)"
+            @click="search()"
             append-icon="mic" 
             flat="" 
             hide-details="" 
@@ -45,8 +45,14 @@ export default {
     methods: { 
         ...mapActions({
             setSideBar: 'setSideBar',
-            setStatusDialog: 'dialog/setStatus'
+            setStatusDialog: 'dialog/setStatus',
+            setComponent: 'dialog/setComponent',
         }),
+        search(){
+            this.setStatusDialog(true)
+            this.setComponent('search')
+            this.setSideBar(false)
+        }
     },
     computed: 
     { 

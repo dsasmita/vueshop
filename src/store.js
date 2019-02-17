@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import cart from './stores/cart'
 import alert from './stores/alert'
 import dialog from './stores/dialog'
+import auth from './stores/auth'
 
 Vue.use(Vuex)
 
@@ -28,6 +29,7 @@ export default new Vuex.Store({
     modules: {
         cart,
         alert,
-        dialog
+        dialog,
+        auth
     }
 })
