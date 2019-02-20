@@ -12,7 +12,7 @@
         <v-spacer>
         </v-spacer>
         <!-- header bagian kanan -->
-        <v-btn icon="">
+        <v-btn icon="" @click="cart()">
             <v-badge color="orange" left="" overlap="">
                 <span slot="badge" v-if="countCart>0"> {{ countCart }} </span>
                 <v-icon>
@@ -51,6 +51,11 @@ export default {
         search(){
             this.setStatusDialog(true)
             this.setComponent('search')
+            this.setSideBar(false)
+        },
+        cart(){
+            this.setStatusDialog(true)
+            this.setComponent('cart')
             this.setSideBar(false)
         }
     },

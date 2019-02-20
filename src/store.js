@@ -4,16 +4,21 @@ import cart from './stores/cart'
 import alert from './stores/alert'
 import dialog from './stores/dialog'
 import auth from './stores/auth'
+import region from './stores/region'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
         sideBar: false,
+        prevUrl: '',
     },
     mutations: {
         setSideBar: (state, value) => {
             state.sideBar = value
+        },
+        setPrevUrl: (state, value) => {
+            state.prevUrl = value
         },
     },
     actions: {
@@ -22,14 +27,19 @@ export default new Vuex.Store({
         }, value) => {
             commit('setSideBar', value)
         },
+        setPrevUrl: ({commit}, value) => {
+            commit('setPrevUrl', value)
+        },
     },
     getters: {
         sideBar: state => state.sideBar,
+        prevUrl: state => state.prevUrl,
     },
     modules: {
         cart,
         alert,
         dialog,
-        auth
+        auth,
+        region
     }
 })

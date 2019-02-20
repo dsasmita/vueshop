@@ -56,6 +56,7 @@ export default {
 computed: { 
 	...mapGetters({
             user: 'auth/user',
+            prevUrl : 'prevUrl',
         }),
     },
     methods: { 
@@ -82,7 +83,9 @@ computed: {
                             text: 'Login success',
                             type: 'success',
                         })
-                        this.setStatusDialog(false)
+                        if(this.prevUrl.length>0) 
+                            this.$router.push(this.prevUrl)
+                        this.close()
                     } else {
                         this.setAlert({
                             status: true,
